@@ -2,9 +2,9 @@
 .nav {
     grid-area: n; background-color: #3bafb4;
 }
-.item{
+.item a{
     color: white;
 }
-.active{
+.item a:focus{
     color: gold;
 }

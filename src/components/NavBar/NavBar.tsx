@@ -6,9 +6,12 @@ const NavBar = () => {
     return (
         <nav className={s.nav}>
 
-                <div className={`${s.item} ${s.active}`  }><Link to={'/profile'}>profile</Link></div>
-                <div className={`${s.item} ${s.active}`  }><Link to={ '/dialog'}>Message</Link></div>
-                <div className={`${s.item} ${s.active}`  }><Link to={'*'} >main</Link></div>
+                <div className={`${s.item} ${s.active}`  }>
+                    <Link to={'/profile'}>profile</Link></div>
+                <div className={`${s.item} ${s.active}`  }>
+                    <Link to={ '/dialog'}>Message</Link></div>
+                <div className={`${s.item} ${s.active}`  }>
+                    <Link to={'*'} >main</Link></div>
         </nav>
     );
 };
