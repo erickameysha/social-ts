@@ -1,11 +1,11 @@
 import {v1} from "uuid";
+import {rerenderEntireTree} from "../render";
 
 
 export type PropsDialogType = {
     id: string
     name: string
 }
-
 export type MessageType = {
     id: string
     message: string
@@ -54,4 +54,13 @@ let state: AppState  = {
     }
 
 }
+
+
+export const addTaskHandler = (title: string) => {
+
+   let newPost:postDataType = {id: v1(), message: title}
+    state.profilePage.post.push(newPost)
+rerenderEntireTree()
+}
+console.log(state)
 export default state

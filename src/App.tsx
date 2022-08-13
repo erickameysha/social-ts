@@ -6,10 +6,11 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter,Routes, Route} from "react-router-dom";
 // import {postDataType} from "./components/Profile/MyPost/MyPosts";
-import {AppState, MessageType, postDataType, PropsDialogType} from "./redux/state";
+import {addTaskHandler, AppState, MessageType, postDataType, PropsDialogType} from "./redux/state";
 
 type AppPropsType ={
     appState: AppState
+    addTaskHandler: (title: string)=> void
 }
 const App = (props: AppPropsType) => {
     return (
@@ -21,7 +22,7 @@ const App = (props: AppPropsType) => {
                 <Routes>
                 {/*<Dialogs/>*/}
                     <Route path={"/dialog/*"} element={<Dialogs state={props.appState}/>}/>
-                    <Route path={"/profile"} element={<Profile state={props.appState}/>}/>
+                    <Route path={"/profile"} element={<Profile state={props.appState}  addTaskHandler={props.addTaskHandler}/>}/>
                 </Routes>
             </div>
 
