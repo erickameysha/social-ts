@@ -2,9 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import {v1} from "uuid";
-import state, {addTaskHandler} from "./redux/state";
-import {rerenderEntireTree} from "./render";
-// import {MessageType, PropsDialogType} from "./components/Dialogs/Dialogs";
+import state, {addTask, AppState, subscribe} from "./redux/state";
 
-rerenderEntireTree()
+// import {MessageType, PropsDialogType} from "./components/Dialogs/Dialogs";
+export let  rerenderEntireTree =(state: AppState)=> {
+    ReactDOM.render(
+        <App
+            addTaskHandler={addTask}
+            appState={state}
+        />,
+        document.getElementById('root'));
+
+}
+
+rerenderEntireTree(state)
+subscribe(()=>{rerenderEntireTree(state)})

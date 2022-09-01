@@ -1,6 +1,7 @@
 import {v1} from "uuid";
-import {rerenderEntireTree} from "../render";
-
+let rerenderEntireTree = () => {
+    console.log('fllflf')
+}
 
 export type PropsDialogType = {
     id: string
@@ -14,11 +15,11 @@ export type postDataType = {
     id: string
     message: string
 }
-type ProfilePageType ={
+type ProfilePageType = {
 
     post: postDataType[]
 }
-type messagePageType ={
+type messagePageType = {
     dialogs: PropsDialogType[]
     message: MessageType[]
 }
@@ -28,7 +29,7 @@ export type AppState = {
 
 }
 
-let state: AppState  = {
+let state: AppState = {
     profilePage: {
 
         post: [
@@ -56,11 +57,14 @@ let state: AppState  = {
 }
 
 
-export const addTaskHandler = (title: string) => {
+export const addTask = (title: string) => {
 
-   let newPost:postDataType = {id: v1(), message: title}
+    let newPost: postDataType = {id: v1(), message: title}
     state.profilePage.post.push(newPost)
-rerenderEntireTree()
+    rerenderEntireTree()
+}
+export const subscribe = (observer: ()=> void) => {
+    rerenderEntireTree = observer
 }
 console.log(state)
 export default state

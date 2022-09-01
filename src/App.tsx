@@ -6,7 +6,7 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter,Routes, Route} from "react-router-dom";
 // import {postDataType} from "./components/Profile/MyPost/MyPosts";
-import {addTaskHandler, AppState, MessageType, postDataType, PropsDialogType} from "./redux/state";
+import {addTask, AppState, MessageType, postDataType, PropsDialogType} from "./redux/state";
 
 type AppPropsType ={
     appState: AppState
