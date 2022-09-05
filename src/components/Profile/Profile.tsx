@@ -2,19 +2,19 @@ import React from 'react';
 import s from './Profile.module.css'
 import MyPosts from "./MyPost/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {addTask, AppState, postDataType} from "../../redux/state";
+import {ActionType, AppState, postDataType} from "../../redux/state";
 
 
 type ProfileProps = {
-    state: AppState
-    addTaskHandler: (title: string)=>void
+    post: Array<postDataType>
+    dispatch: (action: ActionType)=>void
 }
 
 const Profile = (props: ProfileProps) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts  addTaskHandler={props.addTaskHandler} postData={props.state} />
+            <MyPosts  dispatch={props.dispatch} postData={props.post} />
         </div>
     )
 }

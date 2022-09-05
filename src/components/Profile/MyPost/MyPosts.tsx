@@ -2,23 +2,24 @@ import React, {ChangeEvent, useState} from 'react';
 
 import Post from "./Posts/Post";
 import {v1} from "uuid";
-import {addTask, AppState, postDataType} from "../../../redux/state";
+import {ActionType, AppState, postDataType} from "../../../redux/state";
 
 
 type MyPostType = {
-    addTaskHandler: (title: string) => void
-    postData: AppState
+    dispatch: (action: ActionType) => void
+    postData: Array<postDataType>
 }
 const MyPost = (props: MyPostType) => {
     let [title, setTitle] = useState('')
 
-    let postElements = props.postData.profilePage.post.map(m => <Post
+    let postElements = props.postData.map(m => <Post
             key={m.id}
             message={m.message}
         />)
     const addPost = () => {
+        debugger
         setTitle('');
-        props.addTaskHandler(title)
+        props.dispatch({type: "ADD-POST", title})
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
@@ -33,7 +34,6 @@ const MyPost = (props: MyPostType) => {
                 </div>
                 <div>
                     {postElements}
-
                 </div>
             </div>
         </div>

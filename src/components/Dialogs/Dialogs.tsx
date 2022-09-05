@@ -5,18 +5,18 @@ import {v1} from "uuid";
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./Message/MessageItem";
 // import {MessageType} from "../../index";
-import {AppState, MessageType, PropsDialogType} from "../../redux/state";
+import {AppState, messagePageType, MessageType, PropsDialogType} from "../../redux/state";
 
 type DialogsPropsType ={
-
-    state: AppState
+message: Array<MessageType>
+    dialogs: Array<PropsDialogType>
 }
 const Dialogs = (props: DialogsPropsType) => {
 
     let dialogsElements =
-        props.state.messagePage.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
+        props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id}/>)
     let messageElements =
-        props.state.messagePage.message.map(message => <MessageItem key={message.id}
+        props.message.map(message => <MessageItem key={message.id}
                                                 message={message.message}
                                                 id={message.id}/>)
     return (

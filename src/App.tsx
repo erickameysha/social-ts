@@ -6,13 +6,15 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter,Routes, Route} from "react-router-dom";
 // import {postDataType} from "./components/Profile/MyPost/MyPosts";
-import {addTask, AppState, MessageType, postDataType, PropsDialogType} from "./redux/state";
+import {ActionType, AppState, MessageType, postDataType, PropsDialogType, StoreType} from "./redux/state";
 
 type AppPropsType ={
-    appState: AppState
-    addTaskHandler: (title: string)=> void
+    // store: StoreType
+    appState: StoreType
+    dispatch: (action: ActionType)=> void
 }
 const App = (props: AppPropsType) => {
+const state= props.appState.getState()
     return (
         <BrowserRouter>
         <div className={'app-wrapper'}>
@@ -20,9 +22,9 @@ const App = (props: AppPropsType) => {
             <NavBar/>
             <div className={'app-wrapper-content'}>
                 <Routes>
-                {/*<Dialogs/>*/}
-                    <Route path={"/dialog/*"} element={<Dialogs state={props.appState}/>}/>
-                    <Route path={"/profile"} element={<Profile state={props.appState}  addTaskHandler={props.addTaskHandler}/>}/>
+                    <Route path={"/dialog/*"} element={<Dialogs dialogs={state.messagePage.dialogs} message={state.messagePage.message}/>}/>
+                    <Route path={"/profile"} element={<Profile post={state.profilePage.post}
+                                                               dispatch={props.dispatch}/>}/>
                 </Routes>
             </div>
 
