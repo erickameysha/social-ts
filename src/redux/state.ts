@@ -1,4 +1,6 @@
 import {v1} from "uuid";
+import {AddPostACType, profileReducer} from "./profile-reducer";
+import {AddMessageAC, dialogsReducer} from "./dialogs-reducer";
 
 export type PropsDialogType = {
     id: string
@@ -12,7 +14,7 @@ export type postDataType = {
     id: string
     message: string
 }
-type ProfilePageType = {
+export type ProfilePageType = {
 
     post: postDataType[]
 }
@@ -22,31 +24,18 @@ export type messagePageType = {
 }
 export type AppState = {
     profilePage: ProfilePageType
-    messagePage: messagePageType
+    dialogsPage: messagePageType
 
 }
-
-
 export type StoreType = {
     _state: AppState
     getState: () => AppState
     _callSubscriber: () => void
-    _addPost: (title: string) => void
-    _addMessage: (title: string)=> void
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionType) => void
 }
-
-
 export type ActionType = AddPostACType | AddMessageAC
-type AddPostACType = {
-    type: 'ADD-POST',
-    title: string
-}
-type AddMessageAC = {
-    type: 'ADD-MESSAGE',
-    title: string
-}
+
 let store: StoreType = {
     _state: {
         profilePage: {
@@ -58,7 +47,7 @@ let store: StoreType = {
                 {id: v1(), message: 'post-4'},
             ]
         },
-        messagePage: {
+        dialogsPage: {
             dialogs: [
                 {id: v1(), name: 'user-1'},
                 {id: v1(), name: 'user-2'},
@@ -83,39 +72,20 @@ let store: StoreType = {
     subscribe(observer: () => void) {
         this._callSubscriber = observer
     },
-    _addPost(title: string) {
 
-        let newPost: postDataType = {id: v1(), message: title}
-        this._state.profilePage.post.push(newPost)
-        this._callSubscriber()
-    },
-    _addMessage(title: string){
-        let newMessage: MessageType = {
-            id: v1(),
-            message: title
-        }
-        this._state.messagePage.message.push(newMessage)
-        this._callSubscriber()
-
-    },
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-           this._addPost(action.title)
-        }else if( action.type === 'ADD-MESSAGE'){
-            this._addMessage(action.title)
-        }
+this._state.profilePage= profileReducer(this._state.profilePage, action as AddPostACType )
+this._state.dialogsPage= dialogsReducer(this._state.dialogsPage, action as AddMessageAC )
     }
 }
 export const addPostAC = (title: string): AddPostACType => {
-  return{
-     type: 'ADD-POST', title
-  }as  const
+    return {
+        type: 'ADD-POST', title
+    } as const
 }
 export const addMessageAC = (title: string): AddMessageAC => {
-  return{
-     type: 'ADD-MESSAGE', title
-  }as  const
+    return {
+        type: 'ADD-MESSAGE', title
+    } as const
 }
-
-
 export default store
