@@ -32,14 +32,19 @@ export type StoreType = {
     getState: () => AppState
     _callSubscriber: () => void
     _addPost: (title: string) => void
+    _addMessage: (title: string)=> void
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionType) => void
 }
 
 
-export type ActionType = AddPostACType
+export type ActionType = AddPostACType | AddMessageAC
 type AddPostACType = {
     type: 'ADD-POST',
+    title: string
+}
+type AddMessageAC = {
+    type: 'ADD-MESSAGE',
     title: string
 }
 let store: StoreType = {
@@ -84,11 +89,32 @@ let store: StoreType = {
         this._state.profilePage.post.push(newPost)
         this._callSubscriber()
     },
+    _addMessage(title: string){
+        let newMessage: MessageType = {
+            id: v1(),
+            message: title
+        }
+        this._state.messagePage.message.push(newMessage)
+        this._callSubscriber()
+
+    },
     dispatch(action) {
         if (action.type === 'ADD-POST') {
            this._addPost(action.title)
+        }else if( action.type === 'ADD-MESSAGE'){
+            this._addMessage(action.title)
         }
     }
+}
+export const addPostAC = (title: string): AddPostACType => {
+  return{
+     type: 'ADD-POST', title
+  }as  const
+}
+export const addMessageAC = (title: string): AddMessageAC => {
+  return{
+     type: 'ADD-MESSAGE', title
+  }as  const
 }
 
 
