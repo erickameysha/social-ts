@@ -1,11 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
 import s from './Dialogs.module.css';
-import {NavLink} from "react-router-dom";
-import {v1} from "uuid";
+
 import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./Message/MessageItem";
-// import {MessageType} from "../../index";
-import {ActionType, addMessageAC, AppState, messagePageType, MessageType, PropsDialogType} from "../../redux/state";
+import {ActionType,   MessageType, PropsDialogType} from "../../redux/store";
+import {AddMessageAC} from "../../redux/dialogs-reducer";
 
 type DialogsPropsType = {
     dispatch: (action: ActionType) => void
@@ -20,7 +19,7 @@ const Dialogs = (props: DialogsPropsType) => {
 
     const addPost = () => {
         setTitle('')
-props.dispatch(addMessageAC(title))
+props.dispatch(AddMessageAC(title))
     }
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

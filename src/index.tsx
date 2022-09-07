@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, { AppState} from "./redux/state";
-import store from "./redux/state"
+import  { AppState} from "./redux/store";
+import store from "./redux/store"
 
 
 export let  rerenderEntireTree =(state: AppState)=> {

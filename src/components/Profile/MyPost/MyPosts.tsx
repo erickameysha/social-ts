@@ -1,8 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
 
 import Post from "./Posts/Post";
-import {v1} from "uuid";
-import {ActionType, addPostAC, AppState, postDataType} from "../../../redux/state";
+
+import {ActionType, postDataType} from "../../../redux/store";
+
+import {AddPostAC} from "../../../redux/profile-reducer";
 
 
 type MyPostType = {
@@ -19,7 +21,7 @@ const MyPost = (props: MyPostType) => {
     const addPost = () => {
         debugger
         setTitle('');
-        props.dispatch(addPostAC(title))
+        props.dispatch(AddPostAC(title))
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)

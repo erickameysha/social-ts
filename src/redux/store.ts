@@ -1,6 +1,6 @@
 import {v1} from "uuid";
-import {AddPostACType, profileReducer} from "./profile-reducer";
-import {AddMessageAC, dialogsReducer} from "./dialogs-reducer";
+import {ProfileActionType, profileReducer} from "./profile-reducer";
+import { dialogsReducer, messageACType} from "./dialogs-reducer";
 
 export type PropsDialogType = {
     id: string
@@ -34,7 +34,7 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionType) => void
 }
-export type ActionType = AddPostACType | AddMessageAC
+export type ActionType = ProfileActionType | messageACType
 
 let store: StoreType = {
     _state: {
@@ -74,18 +74,9 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-this._state.profilePage= profileReducer(this._state.profilePage, action as AddPostACType )
-this._state.dialogsPage= dialogsReducer(this._state.dialogsPage, action as AddMessageAC )
+        this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileActionType)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action as messageACType )
     }
 }
-export const addPostAC = (title: string): AddPostACType => {
-    return {
-        type: 'ADD-POST', title
-    } as const
-}
-export const addMessageAC = (title: string): AddMessageAC => {
-    return {
-        type: 'ADD-MESSAGE', title
-    } as const
-}
+
 export default store

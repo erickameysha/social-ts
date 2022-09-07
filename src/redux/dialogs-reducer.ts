@@ -1,11 +1,15 @@
-import {messagePageType, MessageType} from "./state";
+import {messagePageType, MessageType} from "./store";
 import {v1} from "uuid";
 
-export type AddMessageAC = {
-    type: 'ADD-MESSAGE',
-    title: string
+
+export const AddMessageAC = ( title: string)=> {
+  return {
+      type: 'ADD-MESSAGE',
+      title
+  }as const
 }
-type messageACType = AddMessageAC
+type AddMessageACType = ReturnType<typeof AddMessageAC>
+export type messageACType = AddMessageACType
 export const dialogsReducer = (state: messagePageType, action: messageACType) => {
 
     switch (action.type) {

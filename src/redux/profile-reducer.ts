@@ -1,11 +1,12 @@
-import {postDataType, ProfilePageType} from "./state";
+import {postDataType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
-type ProfileActionType = AddPostACType
+export type ProfileActionType = AddPostACType
+    type AddPostACType=ReturnType<typeof AddPostAC>
 
-export type AddPostACType = {
-    type: 'ADD-POST',
-    title: string
+export const AddPostAC =(title: string)=> {
+    return{type: 'ADD-POST',
+    title}as const
 }
 export const profileReducer = (state: ProfilePageType, action: ProfileActionType) => {
     switch (action.type) {
