@@ -8,7 +8,17 @@ export const AddPostAC =(title: string)=> {
     return{type: 'ADD-POST',
     title}as const
 }
-export const profileReducer = (state: ProfilePageType, action: ProfileActionType) => {
+let initialState:ProfilePageType = {
+
+    post: [
+        {id: v1(), message: 'post-1'},
+        {id: v1(), message: 'post-2'},
+        {id: v1(), message: 'post-3'},
+        {id: v1(), message: 'post-4'},
+    ]
+}
+export const profileReducer = (state= initialState, action: ProfileActionType) :ProfilePageType=> {
+
     switch (action.type) {
         case "ADD-POST":
             let newPost: postDataType = {id: v1(), message: action.title}

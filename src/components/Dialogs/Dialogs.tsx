@@ -5,9 +5,10 @@ import DialogItem from "./DialogItem/DialogItem";
 import MessageItem from "./Message/MessageItem";
 import {ActionType,   MessageType, PropsDialogType} from "../../redux/store";
 import {AddMessageAC} from "../../redux/dialogs-reducer";
+import {DispatchType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
-    dispatch: (action: ActionType) => void
+    dispatch: DispatchType
 
     message: Array<MessageType>
     dialogs: Array<PropsDialogType>

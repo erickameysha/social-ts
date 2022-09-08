@@ -5,15 +5,17 @@ import Post from "./Posts/Post";
 import {ActionType, postDataType} from "../../../redux/store";
 
 import {AddPostAC} from "../../../redux/profile-reducer";
+import {useDispatch} from "react-redux";
+import {DispatchType} from "../../../redux/redux-store";
 
 
 type MyPostType = {
-    dispatch: (action: ActionType) => void
+    dispatch: DispatchType
     postData: Array<postDataType>
 }
 const MyPost = (props: MyPostType) => {
     let [title, setTitle] = useState('')
-
+const dispatch =useDispatch()
     let postElements = props.postData.map(m => <Post
             key={m.id}
             message={m.message}
@@ -21,7 +23,7 @@ const MyPost = (props: MyPostType) => {
     const addPost = () => {
         debugger
         setTitle('');
-        props.dispatch(AddPostAC(title))
+        dispatch(AddPostAC(title))
     }
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
