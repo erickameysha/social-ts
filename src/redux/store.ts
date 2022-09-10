@@ -15,7 +15,7 @@ export type postDataType = {
     message: string
 }
 export type ProfilePageType = {
-
+    newPostText: string
     post: postDataType[]
 }
 export type messagePageType = {
@@ -45,7 +45,8 @@ let store: StoreType = {
                 {id: v1(), message: 'post-2'},
                 {id: v1(), message: 'post-3'},
                 {id: v1(), message: 'post-4'},
-            ]
+            ],
+            newPostText: ''
         },
         dialogsPage: {
             dialogs: [

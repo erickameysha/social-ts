@@ -10,11 +10,11 @@ type ProfileProps = {
     dispatch: DispatchType
 }
 
-const Profile = (props: ProfileProps) => {
+const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts  dispatch={props.dispatch} postData={props.post} />
+            <MyPosts />
         </div>
     )
 }

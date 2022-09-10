@@ -14,8 +14,8 @@ type AppPropsType = {
     store: AppRootStateType
     dispatch: DispatchType
 }
-const App = (props: AppPropsType) => {
-    const state = props.store
+const App = () => {
+
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -25,14 +25,11 @@ const App = (props: AppPropsType) => {
                     <Routes>
                         <Route path={"/dialog/*"} element={
                             <Dialogs
-                                dispatch={props.dispatch}
-                                dialogs={state.dialogsReducer.dialogs}
-                                message={state.dialogsReducer.message}
+
                             />}
                         />
                         <Route path={"/profile"} element={
-                            <Profile post={state.profileReducer.post}
-                                     dispatch={props.dispatch}/>}
+                            <Profile />}
                         />
                     </Routes>
                 </div>

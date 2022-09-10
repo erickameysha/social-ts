@@ -15,14 +15,15 @@ let initialState:ProfilePageType = {
         {id: v1(), message: 'post-2'},
         {id: v1(), message: 'post-3'},
         {id: v1(), message: 'post-4'},
-    ]
+    ],
+    newPostText: ''
 }
 export const profileReducer = (state= initialState, action: ProfileActionType) :ProfilePageType=> {
 
     switch (action.type) {
         case "ADD-POST":
             let newPost: postDataType = {id: v1(), message: action.title}
-            state.post.push(newPost)
+            state.post.unshift(newPost)
 
     }
 
