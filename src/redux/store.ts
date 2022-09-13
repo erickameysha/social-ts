@@ -21,6 +21,7 @@ export type ProfilePageType = {
 export type messagePageType = {
     dialogs: PropsDialogType[]
     message: MessageType[]
+    newMessage: string
 }
 export type AppState = {
     profilePage: ProfilePageType
@@ -61,6 +62,7 @@ let store: StoreType = {
                 {id: v1(), message: 'user-3'},
                 {id: v1(), message: 'user-7545'},
             ],
+            newMessage: '',
         }
 
     },
@@ -77,6 +79,7 @@ let store: StoreType = {
     dispatch(action) {
         this._state.profilePage = profileReducer(this._state.profilePage, action as ProfileActionType)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action as messageACType )
+        // this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action as messageACType )
     }
 }
 

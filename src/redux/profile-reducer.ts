@@ -1,12 +1,22 @@
 import {postDataType, ProfilePageType} from "./store";
 import {v1} from "uuid";
 
-export type ProfileActionType = AddPostACType
+export type ProfileActionType = AddPostACType | updateNewMessageBodyActionType
     type AddPostACType=ReturnType<typeof AddPostAC>
+type updateNewMessageBodyActionType  = {
+    type: 'UPDATE-NEW-MESSAGE-BODY',
+    newMessage: string
 
+}
 export const AddPostAC =(title: string)=> {
     return{type: 'ADD-POST',
     title}as const
+}
+export const updateNewMessageBody = (newMessage: string): updateNewMessageBodyActionType => {
+    return {
+        type: "UPDATE-NEW-MESSAGE-BODY",
+        newMessage: newMessage
+    }as const
 }
 let initialState:ProfilePageType = {
 
@@ -22,11 +32,17 @@ export const profileReducer = (state= initialState, action: ProfileActionType) :
 
     switch (action.type) {
         case "ADD-POST":
-            let newPost: postDataType = {id: v1(), message: action.title}
+            let body = state.newPostText
+            state.newPostText = ''
+            let newPost: postDataType = {id: v1(), message: body}
             state.post.unshift(newPost)
+            return state
+        case "UPDATE-NEW-MESSAGE-BODY":
+            return {...state, newPostText:action.newMessage }
 
+        default: return state
     }
 
 
-    return state
+
 }
