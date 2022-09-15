@@ -1,14 +1,12 @@
 import {messagePageType, MessageType} from "./store";
 import {v1} from "uuid";
 
-
-export const AddMessageAC = ( title: string)=> {
-  return {
-      type: 'ADD-MESSAGE',
-      title
-  }as const
-}
 type AddMessageACType = ReturnType<typeof AddMessageAC>
+export type updateNewMessageBodyActionType = {
+    type: 'UPDATE-NEW-MESSAGE-BODY',
+    newMessage: string
+
+}
 
 export type messageACType = AddMessageACType | updateNewMessageBodyActionType
 let initialState:messagePageType ={
@@ -26,18 +24,15 @@ let initialState:messagePageType ={
     ],
     newMessage: '',
 }
+
 export const dialogsReducer = (state = initialState, action: messageACType): messagePageType => {
-debugger
     switch (action.type) {
         case "ADD-MESSAGE": {
-
-            let newMessage: MessageType = {
+            let newMessages: MessageType = {
                 id: v1(),
                 message: action.title
             }
-            state.message.push(newMessage)
-            state.newMessage = ''
-            return state
+            return {...state, newMessage: '', message:[...state.message, newMessages]}
         }
         case "UPDATE-NEW-MESSAGE-BODY":
             return{...state,newMessage: action.newMessage}
@@ -46,14 +41,17 @@ debugger
     }
 
 }
-export type updateNewMessageBodyActionType = {
-    type: 'UPDATE-NEW-MESSAGE-BODY',
-    newMessage: string
 
-}
 export const updateNewMessageBody = (newMessage: string): updateNewMessageBodyActionType => {
     return {
         type: "UPDATE-NEW-MESSAGE-BODY",
         newMessage: newMessage
     }
+}
+
+export const AddMessageAC = ( title: string)=> {
+    return {
+        type: 'ADD-MESSAGE',
+        title
+    }as const
 }

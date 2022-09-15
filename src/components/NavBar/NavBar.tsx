@@ -11,7 +11,7 @@ const NavBar = () => {
                 <div className={`${s.item} ${s.active}`  }>
                     <Link to={ '/dialog'}>Message</Link></div>
                 <div className={`${s.item} ${s.active}`  }>
-                    <Link to={'*'} >main</Link></div>
+                    <Link to={'/users'} >User</Link></div>
         </nav>
     );
 };

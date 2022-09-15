@@ -32,14 +32,10 @@ export const profileReducer = (state= initialState, action: ProfileActionType) :
 
     switch (action.type) {
         case "ADD-POST":
-            let body = state.newPostText
-            state.newPostText = ''
-            let newPost: postDataType = {id: v1(), message: body}
-            state.post.unshift(newPost)
-            return state
+            let newPost: postDataType = {id: v1(), message:  state.newPostText}
+            return {...state, newPostText: '', post:[newPost,...state.post ]}
         case "UPDATE-NEW-MESSAGE-BODY":
             return {...state, newPostText:action.newMessage }
-
         default: return state
     }
 
