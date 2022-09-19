@@ -5,7 +5,10 @@ import exp from "constants";
 export type loc =
 
     {
-        id: string; photoURL: string, followed: boolean; fullName: string; status: string; location: { city: string; country: string; };
+        id: string; photos: {
+            small: string
+            large: string
+        }, followed: boolean;  name: string; status: string; location: { city: string; country: string; };
     }
 export type FindUsersType = {
 
@@ -17,33 +20,33 @@ type actionType = ToggleFollowACType | SetUsersACType
 let initialState: FindUsersType = {
 
     users: [
-        {
-            id: v1(),
-            photoURL:
-                'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-            followed: false,
-            fullName: 'Dmitry',
-            status: 'am boss',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: v1(),
-            photoURL:
-                'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-            followed: false,
-            fullName: 'sasha',
-            status: 'am ',
-            location: {city: 'Moscow', country: 'russia'}
-        },
-        {
-            id: v1(),
-            photoURL:
-                'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-            followed: true,
-            fullName: 'Andru',
-            status: 'treen',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
+        // {
+        //     id: v1(),
+        //     photoURL:
+        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
+        //     followed: false,
+        //     fullName: 'Dmitry',
+        //     status: 'am boss',
+        //     location: {city: 'Minsk', country: 'Belarus'}
+        // },
+        // {
+        //     id: v1(),
+        //     photoURL:
+        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
+        //     followed: false,
+        //     fullName: 'sasha',
+        //     status: 'am ',
+        //     location: {city: 'Moscow', country: 'russia'}
+        // },
+        // {
+        //     id: v1(),
+        //     photoURL:
+        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
+        //     followed: true,
+        //     fullName: 'Andru',
+        //     status: 'treen',
+        //     location: {city: 'Kiev', country: 'Ukraine'}
+        // },
 
     ]
 }
