@@ -1,7 +1,5 @@
-import React, {ChangeEvent} from 'react';
-
+import React from 'react';
 import Post from "./Posts/Post";
-import {ProfilePageType} from "../../../redux/store";
 import {MyPostType} from "./MyPostsContainer";
 
 

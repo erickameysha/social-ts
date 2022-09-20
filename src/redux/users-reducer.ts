@@ -1,19 +1,18 @@
-import {ProfilePageType} from "./store";
-import {v1} from "uuid";
-import exp from "constants";
-// type UsersType = ReturnType<typeof d >
-export type loc =
+export type loc = {
+    id: string;
+    photos: { small: string, large: string },
+    followed: boolean;
+    name: string;
+    status: string;
+    location: { city: string; country: string; };
+}
 
-    {
-        id: string; photos: {
-            small: string
-            large: string
-        }, followed: boolean;  name: string; status: string; location: { city: string; country: string; };
-    }
+
 export type FindUsersType = {
-
     users: Array<loc>
 }
+
+
 type ToggleFollowACType = ReturnType<typeof toggleFollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
 type actionType = ToggleFollowACType | SetUsersACType
