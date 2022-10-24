@@ -10,46 +10,28 @@ export type loc = {
 
 export type FindUsersType = {
     users: Array<loc>
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 
 type ToggleFollowACType = ReturnType<typeof toggleFollowAC>
 type SetUsersACType = ReturnType<typeof setUsersAC>
-type actionType = ToggleFollowACType | SetUsersACType
+type setCurrentPageACType =ReturnType<typeof setCurrentPageAC>
+type setTotalUsersCountACType =ReturnType<typeof setTotalUsersCountAC>
+type actionType = ToggleFollowACType | SetUsersACType | setCurrentPageACType |setTotalUsersCountACType
+
 let initialState: FindUsersType = {
 
-    users: [
-        // {
-        //     id: v1(),
-        //     photoURL:
-        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-        //     followed: false,
-        //     fullName: 'Dmitry',
-        //     status: 'am boss',
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: v1(),
-        //     photoURL:
-        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-        //     followed: false,
-        //     fullName: 'sasha',
-        //     status: 'am ',
-        //     location: {city: 'Moscow', country: 'russia'}
-        // },
-        // {
-        //     id: v1(),
-        //     photoURL:
-        //         'https://roscongress.org/upload/resize_cache/iblock/16b/289_289_2/dfe711a4_cfb4_4a51_937a_7f9f0ac9a70c.jpg',
-        //     followed: true,
-        //     fullName: 'Andru',
-        //     status: 'treen',
-        //     location: {city: 'Kiev', country: 'Ukraine'}
-        // },
+    users: [],
+    pageSize:5,
+    totalUsersCount: 0,
+    currentPage: 1
 
-    ]
 }
-export const usersReducer = (state = initialState, action: actionType): FindUsersType => {
+
+export const usersReducer = (state = initialState, action: actionType) => {
 
     switch (action.type) {
         case "TOGGLE_FOLLOW":
@@ -58,7 +40,13 @@ export const usersReducer = (state = initialState, action: actionType): FindUser
                 users: state.users.map(el => el.id === action.userID ? {...el, followed: action.followed} : el)
             }
         case "SET-USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case 'SET_CURRENT_PAGE':{
+                return {...state, currentPage:action.currentPage}
+        }
+        case "SET_TOTAL_COUNT":{
+            return {...state, totalUsersCount: action.totalCount}
+        }
         default:
             return state
     }
@@ -72,4 +60,14 @@ export const setUsersAC = (users: Array<loc>) => {
     return {
         type: 'SET-USERS', users
     } as const
+}
+export const setCurrentPageAC = (currentPage: number) => {
+  return{
+      type: 'SET_CURRENT_PAGE',  currentPage
+  }as const
+}
+export const setTotalUsersCountAC = (totalCount:number) => {
+  return{
+      type: 'SET_TOTAL_COUNT',  totalCount
+  }as const
 }
