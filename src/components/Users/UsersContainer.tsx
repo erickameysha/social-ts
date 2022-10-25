@@ -1,15 +1,15 @@
 import React from 'react';
 import {connect} from "react-redux";
-import Users from "./UsersC";
 import {AppRootStateType, DispatchType} from "../../redux/redux-store";
 import {
     FindUsersType,
     loc,
-    setCurrentPageAC,
+    setCurrentPageAC, setToggleFetchingAC,
     setTotalUsersCountAC,
     setUsersAC,
     toggleFollowAC
 } from "../../redux/users-reducer";
+import UsersAPIComponent from "./UsersAPIComponent";
 
 
 type MapStateToPropsType = {
@@ -17,6 +17,8 @@ type MapStateToPropsType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
+
 
 }
 type MapDispatchToPropsType = {
@@ -24,6 +26,8 @@ type MapDispatchToPropsType = {
     setUsers: (users: Array<loc>) => void
     setCurrentPage:(currentPage: number) => void
     setTotalUsersCount: (totalCount:number) => void
+    setToggleFetching: (isFetching: boolean) => void
+
 
 }
 export type RenderUsersType = MapStateToPropsType & MapDispatchToPropsType
@@ -32,7 +36,8 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         users: state.users,
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
-        currentPage: state.users.currentPage
+        currentPage: state.users.currentPage,
+        isFetching: state.users.isFetching
     }
 }
 let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
@@ -49,7 +54,11 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
         },
         setTotalUsersCount: (totalCount:number)=>{
             dispatch(setTotalUsersCountAC(totalCount))
+        },
+        setToggleFetching: (isFetching: boolean)=> {
+            dispatch(setToggleFetchingAC(isFetching))
         }
+
     }
 }
-export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppRootStateType>(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppRootStateType>(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)

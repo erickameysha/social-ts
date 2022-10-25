@@ -12,21 +12,20 @@ const App = () => {
 
     return (
 
-            <div className={'app-wrapper'}>
-                <Header/>
-                <NavBar/>
-                <div className={'app-wrapper-content'}>
+        <div className={'app-wrapper'}>
+            <Header/>
+            <NavBar/>
+            <div className={'app-wrapper-content'}>
 
-
-                        <Routes>
-                        <Route path={"/dialog/*"} element={ <DialogsContainer />}/>
-                        <Route path={"/profile"} element={<Profile />}/>
-                        <Route path={"/users"} element={<UsersContainer/>}/>
-                        </Routes>
-
-                </div>
+                <Routes>
+                    <Route path={"/dialog/*"} element={<DialogsContainer/>}/>
+                    <Route path={"/profile"} element={<Profile/>}/>
+                    <Route path={"/users"} element={<UsersContainer/>}/>
+                </Routes>
 
             </div>
+
+        </div>
 
     );
 };
