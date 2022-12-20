@@ -31,6 +31,8 @@ type MapDispatchToPropsType = {
 
 }
 export type RenderUsersType = MapStateToPropsType & MapDispatchToPropsType
+
+
 let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         users: state.users,
@@ -61,4 +63,6 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
 
     }
 }
+
+
 export const UsersContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, AppRootStateType>(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)

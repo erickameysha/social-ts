@@ -1,10 +1,7 @@
 import React from 'react'
-import userPhoto from "../../assets/avatar.jpg";
-import s from "./Users.module.css";
 import axios from "axios";
 import {FindUsersType, loc} from "../../redux/users-reducer";
 import Users from "./Users";
-import loading from '../Users/loading-gif.gif'
 import Preloader from "../preloader/Preloader";
 
 type PropsType = {

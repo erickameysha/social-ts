@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import userPhoto from "../../assets/avatar.jpg";
 import {FindUsersType, loc} from "../../redux/users-reducer";
+import {Link} from "react-router-dom";
 type PropsType = {
     follow: (userID: string, followed: boolean,) => void
     setUsers: (users: Array<loc>) => void
@@ -36,9 +37,10 @@ const Users = (props:PropsType) => {
         {
             props.users.users.map(u => <div key={u.id}>
                     <span>
-                        <div> <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
+                        <Link to ={'/profile/'+ u.id}>
+                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={s.userPhoto}
                                    alt=""/>
-                        </div>
+                            </Link>
                                  <div>
                              {u.followed ?
                                  <button onClick={() => props.follow(u.id, !u.followed)}>unfollow</button> :
@@ -50,9 +52,6 @@ const Users = (props:PropsType) => {
                         <div>{u.name}</div>
                         <div>{u.status}</div>
                     </span>
-                    {//тут должна быть локация пользователя, но бекенщик мудак
-                        /*<span>{'u.location.city'}</span>*/}
-                    {/*<span>{'u.location.country'}</span>*/}
                     </span>
             </div>)
         }

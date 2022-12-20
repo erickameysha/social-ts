@@ -1,6 +1,7 @@
 import {v1} from "uuid";
 import {ProfileActionType, profileReducer} from "./profile-reducer";
 import { dialogsReducer, messageACType} from "./dialogs-reducer";
+import {ProfileUserType} from "../components/Profile/ProfileContainer";
 
 export type PropsDialogType = {
     id: string
@@ -17,6 +18,7 @@ export type postDataType = {
 export type ProfilePageType = {
     newPostText: string
     post: postDataType[]
+    profile: null |ProfileUserType
 }
 export type messagePageType = {
     dialogs: PropsDialogType[]
@@ -47,8 +49,10 @@ let store: StoreType = {
                 {id: v1(), message: 'post-3'},
                 {id: v1(), message: 'post-4'},
             ],
-            newPostText: ''
+            newPostText: '',
+            profile: null
         },
+
         dialogsPage: {
             dialogs: [
                 {id: v1(), name: 'user-1'},

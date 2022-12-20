@@ -1,8 +1,12 @@
 import {postDataType, ProfilePageType} from "./store";
 import {v1} from "uuid";
+import {ProfileUserType} from "../components/Profile/ProfileContainer";
 
-export type ProfileActionType = AddPostACType | updateNewMessageBodyActionType
+
+
+export type ProfileActionType = AddPostACType | updateNewMessageBodyActionType |setUsersProfileACType
     type AddPostACType=ReturnType<typeof AddPostAC>
+    type setUsersProfileACType=ReturnType<typeof setUsersProfile>
 type updateNewMessageBodyActionType  = {
     type: 'UPDATE-NEW-MESSAGE-BODY',
     newMessage: string
@@ -18,6 +22,13 @@ export const updateNewMessageBody = (newMessage: string): updateNewMessageBodyAc
         newMessage: newMessage
     }as const
 }
+export const setUsersProfile = (profile:ProfileUserType) => {
+    return{
+        type: 'SET-USERS-PROFILE',
+        profile
+    }as const
+
+}
 let initialState:ProfilePageType = {
 
     post: [
@@ -26,7 +37,8 @@ let initialState:ProfilePageType = {
         {id: v1(), message: 'post-3'},
         {id: v1(), message: 'post-4'},
     ],
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 export const profileReducer = (state= initialState, action: ProfileActionType) :ProfilePageType=> {
 
@@ -36,9 +48,13 @@ export const profileReducer = (state= initialState, action: ProfileActionType) :
             return {...state, newPostText: '', post:[newPost,...state.post ]}
         case "UPDATE-NEW-MESSAGE-BODY":
             return {...state, newPostText:action.newMessage }
+        case "SET-USERS-PROFILE":
+
+            return {...state, profile: action.profile}
         default: return state
     }
 
 
 
 }
+
