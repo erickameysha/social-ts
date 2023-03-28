@@ -1,8 +1,8 @@
 import React from 'react'
-import axios from "axios";
 import {FindUsersType, loc} from "../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 type PropsType = {
     follow: (userID: string, followed: boolean,) => void
@@ -22,25 +22,22 @@ class UsersAPIComponent extends React.Component<PropsType> {
     componentDidMount() {
         this.props.setToggleFetching(true)
         console.log('props:', this.props)
-
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{withCredentials: true}
-        ).then(response => {
+           getUsers(this.props.currentPage, this.props.pageSize)
+            .then(response => {
             this.props.setUsers(response.data.items)
             this.props.setToggleFetching(false)
             if (response.data.totalCount >= 1000) {
                 this.props.setTotalUsersCount(response.data.totalCount = 70)
 // сервер выдает 1430 пользователей, мы же передаем ему 350
             }
-
-
         })
 
     }
 
     onPageChanged(pageNumber: number) {
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, {withCredentials:true}
-        ).then(response => {
+        getUsers(pageNumber, this.props.pageSize)
+            .then(response => {
             this.props.setToggleFetching(false)
             this.props.setUsers(response.data.items)
         })

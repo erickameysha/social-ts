@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/avatar.jpg";
 import {FindUsersType, loc} from "../../redux/users-reducer";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import {addUser, deleteUser} from "../../api/api";
 
 type PropsType = {
     follow: (userID: string, followed: boolean,) => void
@@ -46,13 +46,7 @@ const Users = (props: PropsType) => {
                                  <div>
                              {u.followed ?
                                  <button onClick={() => {
-                                     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-
-                                         withCredentials: true,
-                                     headers:{
-                                             'API-KEY' :'b32f5f25-23a2-49a7-8139-79ea8f882efe'
-                                     }
-                                     })
+                                     deleteUser(u.id)
                                          .then(response => {
                                              if (response.data.resultCode == 0) {
                                                  props.follow(u.id, !u.followed)
@@ -60,9 +54,7 @@ const Users = (props: PropsType) => {
                                          })
                                  }}>unfollow</button> :
                                  <button onClick={() =>
-                                     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{withCredentials: true, headers:{
-                                             'API-KEY' :'b32f5f25-23a2-49a7-8139-79ea8f882efe'
-                                         }})
+                                     addUser(u.id)
                                          .then(response => {
                                              if (response.data.resultCode == 0) {
                                                  props.follow(u.id, !u.followed)

@@ -1,18 +1,14 @@
 import React from 'react';
-import s from "./Header.module.css";
-import {NavLink} from "react-router-dom";
 import Header from "./Header";
-import axios from "axios";
 import {connect} from "react-redux";
-import {AppRootStateType, dispatch, DispatchType} from "../../redux/redux-store";
+import {AppRootStateType, DispatchType} from "../../redux/redux-store";
 import {AuthReducerType, setUserDateAC} from "../../redux/auth-reducer";
-import {setUsersAC} from "../../redux/users-reducer";
+import {authUser} from "../../api/api";
 
 class HeaderContainer extends React.Component<RenderProps> {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials: true})
-            .then(response => {
+        authUser().then(response => {
 
                     let{ id, login, email}= response.data.data
                     this.props.setUserDate(id, login, email)
@@ -38,6 +34,7 @@ let mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
         isAuth: state.auth.isAuth
     }
 }
+
 let mapDispatchToPropsType = (dispatch: DispatchType): mapDispatchToPropsType => {
     return {
         setUserDate:  (id:number, login: string, email:string) => {
