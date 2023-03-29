@@ -5,24 +5,28 @@ const instanse = axios.create({
     withCredentials: true,
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     headers: {
-        'API-KEY': 'b32f5f25-23a2-49a7-8139-79ea8f882efe'
+        'API-KEY': 'ad653c9f-7f6e-4de5-b3d6-ac286fa8078e'
     }
 })
 
-export const getUsers = (currentPage: number, pageSize: number) => {
+export const usersAPI =  {
+    getUsers  (currentPage: number, pageSize: number) {
 
-    return instanse.get(`users?page=${currentPage}&count=${pageSize}`, {withCredentials: true}
-    )
-}
-export const deleteUser = (id: string) => {
+        return instanse.get(`users?page=${currentPage}&count=${pageSize}`, {withCredentials: true}
+        )
+    },
+    deleteUser (id: string) {
 
-    return instanse.delete(`follow/${id}`,)
+        return instanse.delete(`follow/${id}`,)
+    },
+    addUser  (id: string){
+
+        return instanse.post(`follow/${id}`, {},)
+    },
+    authUser  () {
+        return instanse.get(`auth/me`)
+    }
+
+
 }
 
-export const addUser = (id: string) => {
-
-    return instanse.post(`follow/${id}`, {},)
-}
-export const authUser = () => {
-    return instanse.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
-}

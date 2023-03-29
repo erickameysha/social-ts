@@ -3,12 +3,12 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {AppRootStateType, DispatchType} from "../../redux/redux-store";
 import {AuthReducerType, setUserDateAC} from "../../redux/auth-reducer";
-import {authUser} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 class HeaderContainer extends React.Component<RenderProps> {
 
     componentDidMount() {
-        authUser().then(response => {
+        usersAPI.authUser().then(response => {
 
                     let{ id, login, email}= response.data.data
                     this.props.setUserDate(id, login, email)

@@ -4,7 +4,7 @@ import {AppRootStateType, DispatchType} from "../../redux/redux-store";
 import {
     FindUsersType,
     loc,
-    setCurrentPageAC, setToggleFetchingAC,
+    setCurrentPageAC, setToggleFetchingAC, setToggleIsProgressAC,
     setTotalUsersCountAC,
     setUsersAC,
     toggleFollowAC
@@ -18,7 +18,7 @@ type MapStateToPropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
-
+    followingInProgress: boolean
 
 }
 type MapDispatchToPropsType = {
@@ -27,6 +27,7 @@ type MapDispatchToPropsType = {
     setCurrentPage:(currentPage: number) => void
     setTotalUsersCount: (totalCount:number) => void
     setToggleFetching: (isFetching: boolean) => void
+    setToggleIsProgress: (isProgress: boolean)=> void
 
 
 }
@@ -39,7 +40,8 @@ let mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
         pageSize: state.users.pageSize,
         totalUsersCount: state.users.totalUsersCount,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followingInProgress: state.users.followingInProgress
     }
 }
 let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
@@ -59,6 +61,9 @@ let mapDispatchToProps = (dispatch: DispatchType): MapDispatchToPropsType => {
         },
         setToggleFetching: (isFetching: boolean)=> {
             dispatch(setToggleFetchingAC(isFetching))
+        },
+        setToggleIsProgress: (isProgress: boolean)=>{
+            dispatch(setToggleIsProgressAC(isProgress))
         }
 
     }
